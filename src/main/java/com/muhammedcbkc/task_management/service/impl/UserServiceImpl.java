@@ -47,6 +47,42 @@ public class UserServiceImpl implements IUserService{
         return savedDto;
     }
 
+    @Override
+    public DtoUser getUserById(Long id) {
+        return userRepository.findById(id)
+                .map(user -> {
+                    DtoUser dtoUser = new DtoUser();
+                    dtoUser.setUsername(user.getUsername());
+                    dtoUser.setEmail(user.getEmail());
+                    return dtoUser;
+                })
+                .orElse(null);
+    }
+
+    @Override
+    public void deleteUser(Long id) {
+        userRepository.deleteById(id);
+    }
+
+    @Override
+    public DtoUserIU updateUser(Long id, DtoUserIU dtoUserIU) {
+        return userRepository.findById(id)
+                .map(user -> {
+                    user.setUsername(dtoUserIU.getUsername());
+                    user.setEmail(dtoUserIU.getEmail());
+                    user.setPassword(dtoUserIU.getPassword());
+                    User savedUser = userRepository.save(user);
+                    
+                    DtoUserIU savedDto = new DtoUserIU();
+                    savedDto.setUsername(savedUser.getUsername());
+                    savedDto.setEmail(savedUser.getEmail());
+                    savedDto.setPassword(savedUser.getPassword());
+                    
+                    return savedDto;
+                })
+                .orElse(null);
+    }
+
 
 
     

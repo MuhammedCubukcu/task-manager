@@ -10,4 +10,13 @@ public interface IUserService {
     public List<DtoUser> getAllUser();
 
     public DtoUserIU saveUser(DtoUserIU dtoUserIU);
+
+
+    public DtoUser getUserById(Long id);
+
+    public void deleteUser(Long id);
+
+
+    public DtoUserIU updateUser(Long id, DtoUserIU dtoUserIU);
+    
 }
