@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ExceptionDTO {
+    
     private String errorCode;
     private String errorMessage;
 
